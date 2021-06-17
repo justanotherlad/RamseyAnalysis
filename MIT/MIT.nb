@@ -1,0 +1,481 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[     19283,        473]
+NotebookOptionsPosition[     18042,        447]
+NotebookOutlinePosition[     18433,        463]
+CellTagsIndexPosition[     18390,        460]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"g", "=", 
+  RowBox[{
+  "Import", "[", 
+   "\"\</home/justanotherlad/Documents/BTech Degree \
+Project/RamseyAnalysis/MIT/socfb-MIT.txt\>\"", "]"}]}]], "Input",
+ CellChangeTimes->{{3.829615714299608*^9, 3.829615735961561*^9}, 
+   3.830221755136932*^9, {3.830222236343533*^9, 3.83022224914785*^9}, {
+   3.830222286183586*^9, 3.830222287893032*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"4661310b-f8b1-41e2-a4d9-6b2d1dae5638"],
+
+Cell[BoxData[
+ RowBox[{"g1", "=", 
+  RowBox[{"ToExpression", "[", 
+   RowBox[{"StringSplit", "[", "g", "]"}], "]"}]}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"224f1a32-9124-405f-817e-bc6ef8dd7b6d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g2", "=", 
+   RowBox[{"DeleteCases", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"UndirectedEdge", "[", 
+          RowBox[{"i", ",", "j"}], "]"}], "&&", 
+         RowBox[{"i", "\[NotEqual]", "j"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "0", ",", 
+          RowBox[{"Max", "[", "g1", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", 
+          RowBox[{"i", "+", "1"}], ",", 
+          RowBox[{"Max", "[", "g1", "]"}]}], "}"}]}], "]"}], "]"}], ",", 
+     "False"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{3.829615758332428*^9},
+ CellLabel->"In[3]:=",ExpressionUUID->"f6641692-0322-4b0e-824a-91b697cf0d24"],
+
+Cell[BoxData[
+ RowBox[{"g3", "=", 
+  RowBox[{"DeleteDuplicates", "[", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{"g1", ",", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", "i", "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", "+", "1"}], "}"}]}], "}"}], "\[Rule]", 
+        RowBox[{"UndirectedEdge", "[", 
+         RowBox[{
+          RowBox[{"g1", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}], ",", 
+          RowBox[{"g1", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "@", "g1"}], ",", "2"}], "}"}]}], "]"}]}], "]"}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"b2433693-8a57-4c9b-be32-1f0a78815113"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"intersectpos", "=", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"disp", "=", 
+       RowBox[{"Dispatch", "[", 
+        RowBox[{"Thread", "[", 
+         RowBox[{"g3", "\[Rule]", "\"\<foo\>\""}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"Flatten", "@", 
+      RowBox[{"Position", "[", 
+       RowBox[{
+        RowBox[{"Replace", "[", 
+         RowBox[{"g2", ",", "disp", ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}], ",", "\"\<foo\>\""}], "]"}]}]}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{3.8296158877433*^9},
+ CellLabel->"In[5]:=",ExpressionUUID->"b4c1d734-0b06-421c-bf28-faacadcfc56d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g2", "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{"g2", ",", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"intersectpos", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "\[Rule]", 
+        RowBox[{"DirectedEdge", "[", 
+         RowBox[{
+          RowBox[{"g2", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"intersectpos", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", "1"}], "]"}], "]"}], ",", 
+          RowBox[{"g2", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"intersectpos", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", "2"}], "]"}], "]"}]}], 
+         "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", 
+         RowBox[{"Length", "[", "intersectpos", "]"}]}], "}"}]}], "]"}]}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{3.829615895174226*^9},
+ CellLabel->"In[6]:=",ExpressionUUID->"0807ef4e-2174-4f26-87f9-133830de4753"],
+
+Cell["", "PageBreak",
+ PageBreakBelow->True,ExpressionUUID->"92dab517-f177-4bc1-8945-9863234e7b0d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MonochromaticCliqueTester", "[", 
+   RowBox[{"n_", ",", "e_", ",", "x_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "subedges", ",", "newEdges", ",", "graph", ",", "i", ",", "j", ",", 
+      "var", ",", "coloredSubgraphs", ",", "cliques", ",", 
+      RowBox[{"list", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "}"}], ",", 
+         RowBox[{"{", "}"}]}], "}"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "0"}], ",", 
+       RowBox[{"i", "<", 
+        RowBox[{"Floor", "@", 
+         RowBox[{"N", "@", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Max", "[", "g1", "]"}], "/", "1000"}], ")"}]}]}]}], ",", 
+       
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"subedges", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"g2", ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"1000", "*", "i"}], "<", 
+               RowBox[{"#", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "<", 
+               RowBox[{"1000", "*", 
+                RowBox[{"(", 
+                 RowBox[{"i", "+", "1"}], ")"}]}]}], ")"}], "&&", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"1000", "*", "i"}], "<", 
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "<", 
+               RowBox[{"1000", "*", 
+                RowBox[{"(", 
+                 RowBox[{"i", "+", "1"}], ")"}]}]}], ")"}]}], "&"}]}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"newEdges", "=", 
+         RowBox[{"Replace", "[", 
+          RowBox[{"subedges", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"DirectedEdge", "[", 
+               RowBox[{"a_", ",", "b_"}], "]"}], ":>", 
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"UndirectedEdge", "[", 
+                 RowBox[{"a", ",", "b"}], "]"}], ",", "Red", ",", "Thick"}], 
+               "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"UndirectedEdge", "[", 
+               RowBox[{"a_", ",", "b_"}], "]"}], ":>", " ", 
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"UndirectedEdge", "[", 
+                 RowBox[{"a", ",", "b"}], "]"}], ",", "Blue"}], "]"}]}]}], 
+            "}"}], ",", 
+           RowBox[{"{", "1", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"graph", "=", 
+         RowBox[{"Graph", "[", "newEdges", "]"}]}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"j", "=", "1"}], ",", 
+          RowBox[{"j", "<=", "x"}], ",", 
+          RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"var", "=", 
+            RowBox[{"Subgraph", "[", 
+             RowBox[{"graph", ",", 
+              RowBox[{"{", 
+               RowBox[{"RandomInteger", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"1000", "*", "i"}], ",", 
+                   RowBox[{"1000", "*", 
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", "1"}], ")"}]}]}], "}"}], ",", "e"}], 
+                "]"}], "}"}], ",", 
+              RowBox[{"VertexLabels", "\[Rule]", "Automatic"}]}], "]"}]}], 
+           ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"Export", "[", 
+            RowBox[{
+             RowBox[{
+             "\"\</home/justanotherlad/Documents/BTech Degree \
+Project/RamseyAnalysis/MIT/Pictures/Test/\>\"", "<>", "\"\<_\>\"", "<>", 
+              RowBox[{"ToString", "[", "n", "]"}], "<>", "\"\<_in_\>\"", "<>", 
+              RowBox[{"ToString", "[", "e", "]"}], "<>", "\"\<_\>\"", "<>", 
+              RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\<_\>\"", "<>", 
+              RowBox[{"ToString", "[", "j", "]"}], "<>", "\"\<.png\>\""}], 
+             ",", "var"}], "]"}], ";", "\[IndentingNewLine]", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"coloredSubgraphs", "=", 
+            RowBox[{"Quiet", "[", 
+             RowBox[{"GroupBy", "[", 
+              RowBox[{
+               RowBox[{"MapAt", "[", 
+                RowBox[{
+                 RowBox[{"Lookup", "[", "LineColor", "]"}], ",", 
+                 RowBox[{"AnnotationValue", "[", 
+                  RowBox[{"var", ",", "EdgeStyle"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"All", ",", "2"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Last", "\[Rule]", "First"}]}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"cliques", "=", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Length", "@", 
+                RowBox[{"First", "@", 
+                 RowBox[{"FindClique", "[", "#", "]"}]}]}], "\[GreaterEqual]",
+                "n"}], "&"}], "/@", "coloredSubgraphs"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{
+             RowBox[{"list", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", 
+             RowBox[{"cliques", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Length", "@", "cliques"}], ">", "1"}], ",", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{
+               RowBox[{"list", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], ",", 
+               RowBox[{"cliques", "[", 
+                RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "]"}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"Labeled", "[", 
+      RowBox[{
+       RowBox[{"BarChart", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Length", "@", 
+             RowBox[{"Cases", "[", 
+              RowBox[{
+               RowBox[{"list", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], ",", "True"}], "]"}]}], ",", 
+            RowBox[{"Length", "@", 
+             RowBox[{"Cases", "[", 
+              RowBox[{
+               RowBox[{"list", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], ",", "True"}], "]"}]}]}], 
+           "}"}], "}"}], ",", 
+         RowBox[{"ChartBaseStyle", "\[Rule]", 
+          RowBox[{"EdgeForm", "[", "Dashed", "]"}]}], ",", 
+         RowBox[{"ChartStyle", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", "Red"}], "}"}]}], ",", 
+         RowBox[{"ChartLegends", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<Don't Know Each Other in Facebook\>\"", ",", 
+            "\"\<Know Each Other in Facebook\>\""}], "}"}]}], ",", 
+         RowBox[{"BarSpacing", "\[Rule]", "None"}], ",", 
+         RowBox[{"ChartLabels", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", "\"\<Clique Exists\>\"", "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"\"\<Blue Cliques\>\"", ",", "\"\<Red Cliques\>\""}], 
+             "}"}]}], "}"}]}], ",", 
+         RowBox[{"LabelingFunction", "\[Rule]", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Placed", "[", 
+             RowBox[{
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{"#", ",", "\"\</\>\"", ",", 
+                 RowBox[{"N", "[", 
+                  RowBox[{"x", "*", "i"}], "]"}]}], "}"}], "]"}], ",", 
+              "Above"}], "]"}], "&"}], ")"}]}], ",", 
+         RowBox[{"PlotLabel", "\[Rule]", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"\"\<Finding \>\"", " ", "<>", 
+             RowBox[{"ToString", "[", "n", "]"}], "<>", 
+             "\"\<-Cliques in a Complete \>\"", "<>", 
+             RowBox[{"ToString", "[", "e", "]"}], "<>", "\"\<-Graph\>\""}], 
+            ",", "\"\<Title\>\"", ",", "16"}], "]"}]}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+         RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Speed\>\""}]}], "]"}], 
+       ",", 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<Probability that there are \>\"", "<>", 
+           RowBox[{"ToString", "[", "n", "]"}], "<>", 
+           "\"\< people knowing each other in a party of \>\"", "<>", 
+           RowBox[{"ToString", "[", "e", "]"}], "<>", 
+           "\"\< at MIT is roughly \>\"", "<>", 
+           RowBox[{"ToString", "[", 
+            RowBox[{"N", "[", 
+             RowBox[{
+              RowBox[{"Length", "@", 
+               RowBox[{"Cases", "[", 
+                RowBox[{
+                 RowBox[{"list", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], ",", "True"}], "]"}]}], "/", 
+              RowBox[{"N", "[", 
+               RowBox[{"x", "*", "i"}], "]"}]}], "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<Probability that there are \>\"", "<>", 
+           RowBox[{"ToString", "[", "n", "]"}], "<>", 
+           "\"\< people not knowing each other in a party of \>\"", "<>", 
+           RowBox[{"ToString", "[", "e", "]"}], "<>", 
+           "\"\< at MIT is roughly \>\"", "<>", 
+           RowBox[{"ToString", "[", 
+            RowBox[{"N", "[", 
+             RowBox[{
+              RowBox[{"Length", "@", 
+               RowBox[{"Cases", "[", 
+                RowBox[{
+                 RowBox[{"list", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], ",", "True"}], "]"}]}], "/", 
+              RowBox[{"N", "[", 
+               RowBox[{"x", "*", "i"}], "]"}]}], "]"}], "]"}]}]}], "}"}], 
+        "]"}], ",", 
+       RowBox[{"LabelStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{
+          RowBox[{"FontSize", "\[Rule]", "13.5"}], ",", 
+          RowBox[{"FontFamily", "\[Rule]", "\"\<Times\>\""}]}], "]"}]}]}], 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Gives", " ", "a", " ", "bar", " ", "chart", " ", "of", " ", "how", " ", 
+     "many", " ", "times", " ", "monochromatic", " ", "n"}], "-", 
+    RowBox[{
+    "cliques", " ", "of", " ", "colors", " ", "blue", " ", "and", " ", "red", 
+     " ", "were", " ", "found", " ", 
+     RowBox[{"resp", ".", " ", "in"}], " ", "a", " ", "complete", " ", 
+     "graph", " ", "of", " ", "e", " ", "vertices", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+       "taken", " ", "randomly", " ", "from", " ", "the", " ", "entire", " ", 
+        "imported", " ", "social"}], "-", 
+       RowBox[{
+       "media", " ", "graph", " ", "in", " ", "batches", " ", "of", " ", 
+        "successive", " ", "1000", " ", "vertices", " ", "at", " ", "a", " ", 
+        "time", " ", "till", " ", "all", " ", "the", " ", "vertices", " ", 
+        "are", " ", "taken", " ", "into", " ", "consideration"}]}], ")"}], 
+     " ", "when", " ", "the", " ", "experiment", " ", "is", " ", "run", " ", 
+     "a", " ", "total", " ", "of", " ", "x", " ", "times"}]}], 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.8296159482345457`*^9, 3.829615954549356*^9}, {
+   3.82961601196273*^9, 3.8296160882988653`*^9}, 3.8296161660678167`*^9, {
+   3.829616213144005*^9, 3.829616240222865*^9}, {3.829616287105974*^9, 
+   3.829616291092465*^9}, {3.829616430611318*^9, 3.8296164350813847`*^9}, {
+   3.829616518105701*^9, 3.829616543644472*^9}, {3.829616747620322*^9, 
+   3.829616748415292*^9}, {3.829616821660206*^9, 3.829616837284525*^9}, {
+   3.829621882794668*^9, 3.829621894934391*^9}, {3.829621926938859*^9, 
+   3.829621939815984*^9}, 3.829622138423524*^9, {3.8296221754722137`*^9, 
+   3.829622284583399*^9}, {3.829622338073946*^9, 3.829622380256947*^9}, {
+   3.829622470289714*^9, 3.829622552613038*^9}, 3.829623681928278*^9, {
+   3.829623852622744*^9, 3.829623873737564*^9}, {3.8296239104253883`*^9, 
+   3.8296239116629972`*^9}, {3.829623995411748*^9, 3.82962399993397*^9}, {
+   3.829626365390719*^9, 3.829626369154438*^9}, {3.829626522333336*^9, 
+   3.829626522617867*^9}, {3.829628955152122*^9, 3.82962895533115*^9}, {
+   3.830222661315064*^9, 3.830222697848472*^9}, 3.8302228288345547`*^9, {
+   3.830222915613574*^9, 3.830222935664522*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"17573ffb-892b-4dad-9611-6c64753e9d2c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MonochromaticCliqueTester", "[", 
+  RowBox[{"3", ",", "5", ",", "1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.829615975903672*^9, 3.829615980573182*^9}, {
+  3.829622698127576*^9, 3.829622702558344*^9}, {3.829623921678649*^9, 
+  3.8296239222656612`*^9}, {3.82962655303242*^9, 3.82962655507063*^9}, {
+  3.829628876278295*^9, 3.829628919716024*^9}, {3.830221689028048*^9, 
+  3.830221708511458*^9}, {3.831428285289173*^9, 
+  3.831428285476832*^9}},ExpressionUUID->"ef904277-c2ef-4683-b235-\
+7ec81f9e998c"],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellChangeTimes->{3.8302226039764433`*^9, 3.830222815099491*^9, 
+  3.830223051878612*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"2b252b6d-01e6-45fc-95ea-d13988a3ac70"]
+}, Open  ]]
+},
+WindowSize->{1152., 605.4},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (July 8, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"29072175-23f9-4a78-a34d-fe75f760b552"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[561, 20, 447, 9, 29, "Input",ExpressionUUID->"4661310b-f8b1-41e2-a4d9-6b2d1dae5638"],
+Cell[1011, 31, 206, 4, 29, "Input",ExpressionUUID->"224f1a32-9124-405f-817e-bc6ef8dd7b6d"],
+Cell[1220, 37, 769, 21, 29, "Input",ExpressionUUID->"f6641692-0322-4b0e-824a-91b697cf0d24"],
+Cell[1992, 60, 850, 24, 29, "Input",ExpressionUUID->"b2433693-8a57-4c9b-be32-1f0a78815113"],
+Cell[2845, 86, 664, 18, 29, "Input",ExpressionUUID->"b4c1d734-0b06-421c-bf28-faacadcfc56d"],
+Cell[3512, 106, 996, 28, 50, "Input",ExpressionUUID->"0807ef4e-2174-4f26-87f9-133830de4753"],
+Cell[4511, 136, 99, 1, 4, "PageBreak",ExpressionUUID->"92dab517-f177-4bc1-8945-9863234e7b0d",
+ PageBreakBelow->True],
+Cell[4613, 139, 12655, 287, 834, "Input",ExpressionUUID->"17573ffb-892b-4dad-9611-6c64753e9d2c"],
+Cell[CellGroupData[{
+Cell[17293, 430, 525, 9, 29, "Input",ExpressionUUID->"ef904277-c2ef-4683-b235-7ec81f9e998c"],
+Cell[17821, 441, 205, 3, 33, "Output",ExpressionUUID->"2b252b6d-01e6-45fc-95ea-d13988a3ac70"]
+}, Open  ]]
+}
+]
+*)
+
